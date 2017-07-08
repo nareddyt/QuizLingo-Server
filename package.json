@@ -1,0 +1,22 @@
+{
+  "name": "quizlingo-server",
+  "version": "1.0.0",
+  "description": "Server for the QuizLingo google assistant bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nareddyt/QuizLingo-Server.git"
+  },
+  "author": "Tejasvi Nareddy",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nareddyt/QuizLingo-Server/issues"
+  },
+  "homepage": "https://github.com/nareddyt/QuizLingo-Server#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
