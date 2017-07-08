@@ -23,7 +23,7 @@ module.exports = {
 
             let word = 'NEED TO PICK ' + language + ' WORD FROM DB';
             // TODO randomly pick word from db based on language
-            if (language === 'spanish') {
+            if (language.toUpperCase() === 'spanish'.toUpperCase()) {
                 word = 'comer';
             }
 
@@ -35,6 +35,19 @@ module.exports = {
             };
 
             apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
+        } else if (action === 'check_answer') {
+            console.log('Webhook action: check_answer');
+
+            // TODO actual checking logic with a theasurus or something
+
+            // TODO change response based on correctness
+            const response = 'Yes, that is correct!';
+            var params = {
+                feedback: response
+            };
+
+            apiaiUtil.sendFollowupResponse(res, 'send_feedback', params);
+
         } else {
             res.sendStatus(400);
         }
