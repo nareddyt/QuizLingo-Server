@@ -15,11 +15,11 @@ module.exports = {
 
             let language;
             for (const con of contexts) {
-                if (con.name === 'question-asked') {
+                if (con.name === 'save-language') {
                     language = con.parameters.language;
                 }
             }
-            console.log('language set to', language);
+            console.log('language set to ' + language);
 
             let word = 'NEED TO PICK ' + language + ' WORD FROM DB';
             // TODO randomly pick word from db based on language
@@ -27,8 +27,11 @@ module.exports = {
                 word = 'comer';
             }
 
+            console.log('asking about word', word);
+
             var params = {
-                toAskWord: word
+                toAskWord: word,
+                language: language
             };
 
             apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
