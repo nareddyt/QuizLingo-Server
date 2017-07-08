@@ -6,14 +6,14 @@ module.exports = {
      * Sends a fulfillment response with a followup back to api.ai
      */
     sendFollowupResponse: function (res, followupEvent, parameters) {
-        var json = {};
+        let json = {};
 
-        var event = {};
+        let event = {};
         event.name = followupEvent;
         json.followupEvent = event;
 
         if (parameters) {
-            var size = Object.keys(parameters).length;
+            let size = Object.keys(parameters).length;
             if (size > 0) {
                 event.data = parameters;
             }

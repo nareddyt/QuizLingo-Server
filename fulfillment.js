@@ -29,7 +29,7 @@ module.exports = {
 
             console.log('asking about word', word);
 
-            var params = {
+            let params = {
                 toAskWord: word,
                 language: language
             };
@@ -38,11 +38,22 @@ module.exports = {
         } else if (action === 'check_answer') {
             console.log('Webhook action: check_answer');
 
+            let language;
+            let word;
+            let answer;
+            for (const con of contexts) {
+                if (con.name === 'save-language') {
+                    language = con.parameters.language;
+                    word = con.parameters.toAskWord;
+                    answer = con.parameters.answer;
+                }
+            }
+
             // TODO actual checking logic with a theasurus or something
 
             // TODO change response based on correctness
-            const response = 'Yes, that is correct!';
-            var params = {
+            let response = 'Yes, that is correct!';
+            let params = {
                 feedback: response
             };
 
