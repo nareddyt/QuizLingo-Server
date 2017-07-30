@@ -2,7 +2,10 @@
  * Created by tejun on 7/8/2017.
  */
 
-var apiaiUtil = require('./apiai-util');
+const apiaiUtil = require('./apiai-util');
+const AWS = require('aws-sdk');
+
+AWS.config.update({region: 'us-west-1'});
 
 module.exports = {
     process: function (req, res) {
@@ -22,19 +25,41 @@ module.exports = {
             console.log('language set to ' + language);
 
             let word = 'NEED TO PICK ' + language + ' WORD FROM DB';
-            // TODO randomly pick word from db based on language
+
+            // Randomly pick word from db based on language
             if (language.toUpperCase() === 'spanish'.toUpperCase()) {
-                word = 'comer';
+                let id = Math.floor(Math.random() * 4500);
+
+                let params = {
+                    Key: {
+                        "id": {
+                            N: id.toString()
+                        }
+                    },
+                    TableName: "Spanish"
+                };
+
+                console.log('Getting word number', id);
+
+                let dynamodb = new AWS.DynamoDB();
+                dynamodb.getItem(params, function (err, data) {
+                    if (err) {
+                        // an error occurred
+                        console.log(err, err.stack);
+                    } else {
+                        // successful response
+                        word = data.Item.Spanish.S;
+                        console.log('asking about word', word);
+
+                        let params = {
+                            toAskWord: word,
+                            language: language
+                        };
+
+                        apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
+                    }
+                });
             }
-
-            console.log('asking about word', word);
-
-            let params = {
-                toAskWord: word,
-                language: language
-            };
-
-            apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
         } else if (action === 'check_answer') {
             console.log('Webhook action: check_answer');
 

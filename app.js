@@ -4,7 +4,7 @@
 
 const express = require('express');
 const fulfillment = require('./fulfillment.js');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
