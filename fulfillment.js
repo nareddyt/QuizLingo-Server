@@ -79,9 +79,21 @@ module.exports = {
             }
 
             // TODO actual checking logic with a theasurus or something
+            // For now, just do a simple comparision
+            let response = 'No, it means: ' + def;
 
-            // TODO change response based on correctness
-            let response = 'Yes, that is correct!';
+            const definitions = def.split(",");
+            for (let definition of definitions) {
+
+                // Check for a correct definition
+                if (answer === definition) {
+                    response = 'Yes, that is correct!';
+                    break;
+                }
+
+            }
+
+            // Response
             let params = {
                 feedback: response
             };
