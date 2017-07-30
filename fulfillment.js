@@ -49,11 +49,13 @@ module.exports = {
                     } else {
                         // successful response
                         word = data.Item.Spanish.S;
+                        let def = data.Item.English.S;
                         console.log('asking about word', word);
 
                         let params = {
                             toAskWord: word,
-                            language: language
+                            language: language,
+                            definitionOfWord: def
                         };
 
                         apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
@@ -66,11 +68,13 @@ module.exports = {
             let language;
             let word;
             let answer;
+            let def;
             for (const con of contexts) {
                 if (con.name === 'save-language') {
                     language = con.parameters.language;
                     word = con.parameters.toAskWord;
                     answer = con.parameters.answer;
+                    def = con.parameters.definitionOfWord;
                 }
             }
 
