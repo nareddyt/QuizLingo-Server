@@ -86,7 +86,8 @@ module.exports = {
             for (let definition of definitions) {
 
                 // Check for a correct definition
-                if (answer === definition) {
+                if (definition.indexOf(answer) > -1) {
+                    console.log('Found the defintion:', definition);
                     response = 'Yes, that is correct!';
                     break;
                 }
