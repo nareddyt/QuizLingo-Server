@@ -98,7 +98,7 @@ module.exports = {
 
             // TODO actual checking logic with a theasurus or something
             // For now, just do a simple comparision
-            let response = 'No, it means: ' + def;
+            let response = 'No, it means: ' + def + '.';
 
             const definitions = def.split(",");
             for (let definition of definitions) {
