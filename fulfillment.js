@@ -63,8 +63,9 @@ module.exports = {
                     console.log(err, err.stack);
                 } else {
                     // successful response
-                    word = data.Item.Spanish.S;
-                    if (word === null) {
+                    if (params.TableName === 'Spanish') {
+                        word = data.Item.Spanish.S;
+                    } else if (params.TableName === 'French') {
                         word = data.Item.French.S;
                     }
 
