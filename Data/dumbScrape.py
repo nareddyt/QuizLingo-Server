@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-spanish_base_url = "https://www.memrise.com/course/737/first-5000-words-of-spanish/"
+spanish_base_url = "https://www.memrise.com/course/33/introductory-french-vocab/"
 
 #Hardcode it for 63 because only 63 things
-for pageNum in range(2,64):
+for pageNum in range(1,21):
     page = requests.get(spanish_base_url+str(pageNum))
     soup = BeautifulSoup(page.content, 'html.parser')
     spanishWords = soup.find_all(class_="col_a col text")

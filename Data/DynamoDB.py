@@ -13,11 +13,11 @@ def insertItems(argv, table):
                 Item = {
                     'id' : count,
                     'English' : item[0],
-                    'Spanish' : item[1]
+                    'French' : item[1]
                 }
             )
 if __name__ == '__main__':
     main = (sys.argv[1:])
     dynamoDB = boto3.resource('dynamodb')
-    table = dynamoDB.Table('Spanish')
+    table = dynamoDB.Table('French')
     insertItems(main, table)

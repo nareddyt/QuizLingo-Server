@@ -27,10 +27,13 @@ module.exports = {
             let word = 'NEED TO PICK ' + language + ' WORD FROM DB';
 
             // Randomly pick word from db based on language
-            if (language.toUpperCase() === 'spanish'.toUpperCase()) {
-                let id = Math.floor(Math.random() * 4500);
+            let id = -1;
+            let params = {};
 
-                let params = {
+            if (language.toUpperCase() === 'spanish'.toUpperCase()) {
+                id = Math.floor(Math.random() * 4500);
+
+                params = {
                     Key: {
                         "id": {
                             N: id.toString()
@@ -38,30 +41,45 @@ module.exports = {
                     },
                     TableName: "Spanish"
                 };
+            } else if (language.toUpperCase() === 'french'.toUpperCase()) {
+                id = Math.floor(Math.random() * 1000);
 
-                console.log('Getting word number', id);
-
-                let dynamodb = new AWS.DynamoDB();
-                dynamodb.getItem(params, function (err, data) {
-                    if (err) {
-                        // an error occurred
-                        console.log(err, err.stack);
-                    } else {
-                        // successful response
-                        word = data.Item.Spanish.S;
-                        let def = data.Item.English.S;
-                        console.log('asking about word', word);
-
-                        let params = {
-                            toAskWord: word,
-                            language: language,
-                            definitionOfWord: def
-                        };
-
-                        apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
-                    }
-                });
+                params = {
+                    Key: {
+                        "id": {
+                            N: id.toString()
+                        }
+                    },
+                    TableName: "French"
+                };
             }
+
+            console.log('Getting word number', id);
+
+            let dynamodb = new AWS.DynamoDB();
+            dynamodb.getItem(params, function (err, data) {
+                if (err) {
+                    // an error occurred
+                    console.log(err, err.stack);
+                } else {
+                    // successful response
+                    word = data.Item.Spanish.S;
+                    if (word === null) {
+                        word = data.Item.French.S;
+                    }
+
+                    let def = data.Item.English.S;
+                    console.log('asking about word', word);
+
+                    let params = {
+                        toAskWord: word,
+                        language: language,
+                        definitionOfWord: def
+                    };
+
+                    apiaiUtil.sendFollowupResponse(res, 'ask-for-answer', params);
+                }
+            });
         } else if (action === 'check_answer') {
             console.log('Webhook action: check_answer');
 
