@@ -63,11 +63,14 @@ module.exports = {
                     console.log(err, err.stack);
                 } else {
                     // successful response
-                    if (params.TableName === 'Spanish') {
+                    if (data.Item.Spanish) {
                         word = data.Item.Spanish.S;
-                    } else if (params.TableName === 'French') {
+                    } else if (data.Item.French) {
                         word = data.Item.French.S;
+                    } else {
+                        word = "COULD NOT LOAD WORD, THIS IS BROKEN";
                     }
+
 
                     let def = data.Item.English.S;
                     console.log('asking about word', word);
