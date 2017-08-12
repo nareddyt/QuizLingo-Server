@@ -1,20 +1,27 @@
 import requests
 from bs4 import BeautifulSoup
+import DynamoDB
 
 spanish_base_url = "https://www.memrise.com/course/33/introductory-french-vocab/"
 
 #Hardcode it for 63 because only 63 things
+
+words = [];
+
 for pageNum in range(1,21):
     page = requests.get(spanish_base_url+str(pageNum))
     soup = BeautifulSoup(page.content, 'html.parser')
-    spanishWords = soup.find_all(class_="col_a col text")
+    foreignWords = soup.find_all(class_="col_a col text")
     englishWords = soup.find_all(class_="col_b col text")
-    if spanishWords and englishWords:
-        if len(spanishWords) != len(englishWords):
+    if foreignWords and englishWords:
+        if len(foreignWords) != len(englishWords):
             print("Error: Words don't match!")
             break
-        for wordPairs in range(len(spanishWords)):
-            print(spanishWords[wordPairs].text)
-            print(englishWords[wordPairs].text)
+        for wordPairs in range(len(foreignWords)):
+            foreign = foreignWords[wordPairs].text
+            english = englishWords[wordPairs].text
+            print(foreign + ": " + english)
 
-            #Needs to perform some parsing
+            words.append((english, foreign))
+
+DynamoDB.main(words)
