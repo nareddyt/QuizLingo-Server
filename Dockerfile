@@ -1,6 +1,3 @@
-# Allow arg for port
-ARG port=8080
-
 # Default nodejs image to build from
 FROM node:6
 
@@ -20,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Expose the correct port
-EXPOSE $port
+EXPOSE 5000
 
 CMD [ "npm", "start" ]
 
