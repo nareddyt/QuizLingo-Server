@@ -16,7 +16,6 @@ app.get('/', function (req, res) {
 });
 
 app.get('/ping', function (req, res) {
-    console.log('info', req.originalUrl + ' with payload ' + JSON.stringify(req.body) + ' and headers ' + JSON.stringify(req.headers));
     res.send('pong');
 });
 
