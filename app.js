@@ -10,6 +10,11 @@ const app = express();
 app.use(bodyParser.json());
 const port = normalizePort('5000');
 
+app.get('/', function (req, res) {
+    console.log('info', req.originalUrl + ' with payload ' + JSON.stringify(req.body) + ' and headers ' + JSON.stringify(req.headers));
+    res.send('Hello world! Quizlingo fulfillment service created by Tejasvi Nareddy');
+});
+
 app.get('/ping', function (req, res) {
     console.log('info', req.originalUrl + ' with payload ' + JSON.stringify(req.body) + ' and headers ' + JSON.stringify(req.headers));
     res.send('pong');
