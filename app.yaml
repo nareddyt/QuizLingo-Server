@@ -9,8 +9,6 @@ resources:
   disk_size_gb: 10
 network:
   instance_tag: quizlingo-instance
-  forwarded_ports:
-    - 8080/tcp
 liveness_check:
   path: "/ping"
 readiness_check:
