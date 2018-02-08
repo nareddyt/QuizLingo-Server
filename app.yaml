@@ -1,5 +1,7 @@
 runtime: custom
 env: flex
+skip_files:
+- ^(.*/)?\.env$
 
 manual_scaling:
   instances: 1

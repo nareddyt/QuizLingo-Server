@@ -2,6 +2,8 @@
  * Created by tejun on 7/8/2017.
  */
 
+require('dotenv').config();
+
 const express = require('express');
 const fulfillment = require('./fulfillment.js');
 const bodyParser = require('body-parser');
