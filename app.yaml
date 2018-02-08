@@ -6,8 +6,8 @@ skip_files:
 manual_scaling:
   instances: 1
 resources:
-  cpu: 1
-  memory_gb: 1.5
+  cpu: 0.25
+  memory_gb: 0.75
   disk_size_gb: 10
 network:
   instance_tag: quizlingo-instance
