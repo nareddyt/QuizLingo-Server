@@ -10,7 +10,7 @@ resources:
 network:
   instance_tag: quizlingo-instance
   forwarded_ports:
-    - 5000/tcp
+    - 8080/tcp
 liveness_check:
   path: "/ping"
 readiness_check:
