@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node getEnv.js && node app.js",
-    "test": "echo \"Error: no test specified, but returning success\" && exit 0"
+    "test": "echo \"Error: no test specified, but returning success\" && exit 0",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,8 @@
     "aws-sdk": "^2.92.0",
     "body-parser": "^1.17.2",
     "dotenv": "^5.0.0",
-    "express": "^4.15.3"
-  }
+    "express": "^4.15.3",
+    "snyk": "^1.161.1"
+  },
+  "snyk": true
 }
