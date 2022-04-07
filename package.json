@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/nareddyt/QuizLingo-Server#readme",
   "dependencies": {
-    "@google-cloud/storage": "^1.5.2",
+    "@google-cloud/storage": "^5.19.0",
     "aws-sdk": "^2.92.0",
     "body-parser": "^1.17.2",
     "dotenv": "^5.0.0",
